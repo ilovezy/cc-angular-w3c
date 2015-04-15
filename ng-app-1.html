@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=no">
+<title>directive</title>
+<link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+<div class="container">
+	<h2 class="text-center">ng-directive 指令 </h2>
+	<p>在输入框中输入</p>
+	<label>姓名：<input type="text" class="form-control" ng-model="name"/></label>
+	<p class="well" ng-bind="name">测试用</p>
+	<p class="well">
+		ng-app指令定义一个 AngularJS 应用程序<br />
+		ng-model 指令把元素值（比如输入框的值 经测试并不是 input 的value？）绑定到应用程序 <br />
+		ng-bind 指令把应用程序数据绑定到 html 视图
+		<br />
+		<span class="text-danger">通过firefox可以看到，p ng-bind 的本来的数据没有了，而会添加一个 .ng-binding 类 <br />
+		在 p ng-model 中会添加 .ng-pristine 和　.ng-valid 类
+		</span>
+	</p>
+	<hr />
+	<p class="alert alert-success">AngularJS 是以 ng- 为前缀的HTML属性</p>
+	<div class="well" ng-init="firstName = 'misCC'">
+	<p class="text-info">姓名为 <span ng-bind="firstName"></span></p>
+	</div>
+	<hr />
+	<p>由于HTML5自定义属性以 data- 开头，所以 AngularJS 也可以用 data-ng- * 来写</p>
+
+	<hr />
+	<h3>AngularJS 表达式</h3>
+	<p>表达式写在双大括号内 {{ expression }} <br />
+	表达式把数据绑定到 HTML，和 ng-bind 指令类似 <br />
+	AngularJS 会在表达式书写的位置 “输出” 数据 <br />
+	类似于js表达式，可以包含文字，运算符，变量 <br />
+	</p>
+	<div class="well">
+		<p>my first expression: {{ 5 + 5 }}</p>
+	</div>
+
+	<hr />
+	<h3>AngularJS 数字 <small>使用 ng-init 来初始化变量</small></h3>
+	<div class="well" ng-init="quantity = 1; cost = 5">
+		<p>总价： {{ quantity * cost }}</p>
+	</div>
+	<p class="alert alert-danger">其实使用 ng-init 来初始化不常用，后面的控制器一章可以学到更好用的方法初始化数据</p>
+
+	<hr />
+
+	<h3>AngularJS字符串 <small>也使用 ng-init 初始化字符串变量</small></h3>
+	<div class="well" ng-init="firstName = 'CC'; lastName = 'ZY'">
+		<p>Name: <span class="label label-success">{{ firstName + ' and ' + lastName }}</span></p>
+	</div>
+	<p>其实和 ng-bind 基本一样</p>
+	<div class="well" ng-init="firstName = 'QQ'; lastName = 'MH'">
+		<p>Name: <span class="label label-info" ng-bind="firstName + ' and ' + lastName"></span></p>
+	</div>
+
+
+
+
+
+
+
+
+</div>
+<script src="angular.min.js"></script>
+</body>
+</html>
