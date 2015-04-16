@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=no">
+<title>Angular 过滤器</title>
+<link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+<div class="container">
+	<h2 class="text-center">Angular 过滤器</h2>
+
+	<h3>在表达式内添加过滤器 <small>通过管道字符 | 和一个过滤器添加到表达式中</small></h3>
+	<p class="panel">这里写法是 {{ person.lastName | uppercase }} 和 {{ person.lastName | lowercase }}</p>
+	<div class="well" ng-app ng-controller="person">
+		<p>姓名为： {{ person.lastName | uppercase }}</p>
+		<p>姓名为： {{ person.lastName | lowercase }}</p>
+	</div>
+
+
+</div>
+
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+'use strict'
+
+function person($scope){
+	$scope.person = {
+		firstName: 'zy',
+		lastName: 'QqerweQEWQDS'
+	}
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=no">
+<title>ng 表单验证</title>
+<link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+<div class="container">
+<h2 class="text-center">ng 表单验证</h2>
+
+<h3>表单测试数据绑定</h3>
+<div class="well" ng-controller="ccFormController">
+	<form method="post" action="" novalidate class="form-inline" >
+		First Name : <input type="text" ng-model="user.firstName" class="form-control" /><br /><br />
+		Last Name: <input type="text" ng-model="user.lastName"  class="form-control" /><br />
+		<br />
+
+		<button class="btn btn-warning" ng-click="reset()" >RESET</button><br />
+		<br />
+
+	</form>
+	<p>form = {{ user }}</p>
+	<p>master = {{ master }}</p>
+</div>
+
+<hr />
+
+<h3>表单验证</h3>
+<div class="well">
+<form ng-controller="ccValidate" name="ccForm" novalidate class="form-inline" >
+	UserName: <br />
+		<input type="text" name="username" ng-model="username" required class="form-control" />
+		<p ng-show="ccForm.username.$dirty && ccForm.user.$invalid">
+			<p class="text-danger" ng-show="ccForm.username.$error.required">UserName is required !	</p>
+		</p>
+
+
+	Email: <br />
+		<input type="email" name="email" ng-model="email" required class="form-control" />
+		<p ng-show="ccForm.email.$dirty && ccForm.email.$invalid">
+			<p class="text-danger" ng-show="ccForm.email.$error.required">Email is required !</p>
+			<p class="text-danger" ng-show="ccForm.email.$error.email">Invalid email address</p>
+		</p>
+
+
+	<input type="submit" ng-disabled="ccForm.username.$dirty && ccForm.username.$invalid || ccForm.email.$dirty && ccForm.email.$invalid" class="btn btn-default" />
+</form>
+</div>
+
+
+
+</div>
+
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+'use strict'
+
+function ccFormController($scope){
+	$scope.master = {
+		firstName: 'QQ',
+		lastName: 'MH'
+	}
+	$scope.reset = function(){
+		$scope.user = angular.copy($scope.master)
+	}
+	$scope.reset()
+}
+
+function ccValidate($scope){
+	$scope.username = 'CC and ZY'
+	$scope.email = '1234219@qq.com'
+}
+
+</script>
+
+</body>
+</html>

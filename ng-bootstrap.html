@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=no">
+<title>ng-boostrap-table</title>
+<link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+</head>
+
+<body ng-controller="ccController">
+
+<div class="container-fluid">
+<h2 class="text-center">Users <small>这个表格以后可能用的到</small></h2>
+
+<h3>Users Infomation</h3>
+<table class="table table-striped table-hover table-responsive">
+	<thead><tr>
+	<th>First Name</th>
+	<th>Last Name</th>
+	<th>Edit</th>
+	</tr></thead>
+
+	<tr ng-repeat="user in users">
+		<td>{{ user.firstName }}</td>
+		<td>{{ user.lastName }}</td>
+		<td><button class="btn btn-default" ng-click="editUser(user.id)">
+			<span class="glyphicon glyphicon-pencil"></span> Edit
+		</button></td>
+	</tr>
+</table>
+<button class="btn btn-info" ng-click="editUser('new')">
+	<span class="glyphicon glyphicon-user"></span> Create New User
+</button>
+
+<hr />
+<h3 ng-show="edit">Create New User: </h3>
+<h3 ng-hide="edit">Edit User: </h3>
+
+<form class="form-horizontal">
+<div class="form-group">
+	<label class="col-sm-2 control-label">
+	First Name :
+	</label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="firstName" ng-disabled="!edit" placeholder="First Name" class="form-control" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-2 control-label">
+	Last Name :
+	</label>
+	<div class="col-sm-10">
+		<input type="text" ng-model="lastName" ng-disabled="!edit" placeholder="Last Name"  class="form-control"/>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-2 control-label">
+	Password :
+	</label>
+	<div class="col-sm-10">
+		<input type="password" ng-model="password" placeholder="Password"  class="form-control"/>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-2 control-label">
+	Repeat Password :
+	</label>
+	<div class="col-sm-10">
+		<input type="password" ng-model="rePassword" placeholder="Repeat Password"  class="form-control"/>
+	</div>
+</div>
+</form>
+
+<button class="btn btn-success" ng-disabled="error || incomplete">
+	<span class="glyphicon glyphicon-save"></span> Save Changes
+</button>
+
+</div>
+<br />
+<br />
+
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+'use strict'
+
+function ccController($scope){
+	$scope.firstName = ''
+	$scope.lastName = ''
+	$scope.password = ''
+	$scope.rePassword = ''
+	$scope.users = [
+		{id: 1, firstName: 'Hege', lastName: 'Pege'},
+		{id: 2, firstName: 'Kim', lastName: 'Pim'},
+		{id: 3, firstName: 'Sal', lastName: 'Smith'},
+		{id: 4, firstName: 'Jack', lastName: 'Jones'},
+		{id: 5, firstName: 'John', lastName: 'Doe'},
+		{id: 6, firstName: 'Peter', lastName: 'Pan'}
+	]
+	$scope.edit = true
+	$scope.error = false
+	$scope.incomplete = false
+	$scope.editUser = function(id){
+		if(id == 'new'){
+			$scope.edit = true
+			$scope.incomplete = true
+			$scope.firstName = ''
+			$scope.lastName = ''
+		}else{
+			$scope.edit = false
+			$scope.firstName = $scope.users[id-1].firstName
+			$scope.lastName = $scope.users[id-1].lastName
+		}
+	}
+	$scope.$watch('password', function(){ $scope.test() })
+	$scope.$watch('rePassword', function(){ $scope.test() })
+	$scope.$watch('firstName', function(){ $scope.test() })
+	$scope.$watch('lastName', function(){ $scope.test() })
+
+	$scope.test = function(){
+		if($scope.password !== $scope.rePassword){
+			$scope.error = true
+		}else{
+			$scope.error = false
+		}
+
+		$scope.incomplete = false
+
+		if($scope.edit && (
+			!$scope.firstName.length ||
+			!$scope.lastName.length ||
+			!$scope.password.length ||
+			!$scope.rePassword.length
+		)){
+			$scope.incomplete = true
+		}
+	}
+}
+
+</script>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
 <body>
 
 <div class="container">
-	<h2 class="text-center">ng-directive 指令 </h2>
+	<h2 class="text-center">ng-directive 指令 <small>定义数据都直接写到HTML里了，这样不好看，写起来麻烦，后面会有其他方法</small></h2>
 	<p>在输入框中输入</p>
 	<label>姓名：<input type="text" class="form-control" ng-model="name"/></label>
 	<p class="well" ng-bind="name">测试用</p>
@@ -24,16 +24,13 @@
 		</span>
 	</p>
 	<hr />
-	<p class="alert alert-success">AngularJS 是以 ng- 为前缀的HTML属性</p>
+	<p class="alert alert-success">AngularJS 是以 ng- 为前缀的HTML属性,由于HTML5自定义属性以 data- 开头，所以 AngularJS 也可以用 data-ng- * 来写</p>
 	<div class="well" ng-init="firstName = 'misCC'">
 	<p class="text-info">姓名为 <span ng-bind="firstName"></span></p>
 	</div>
 	<hr />
-	<p>由于HTML5自定义属性以 data- 开头，所以 AngularJS 也可以用 data-ng- * 来写</p>
-
-	<hr />
-	<h3>AngularJS 表达式</h3>
-	<p>表达式写在双大括号内 {{ expression }} <br />
+	<h3>AngularJS 表达式 <small>表达式写在双大括号内 {{ expression }}</small></h3>
+	<p>
 	表达式把数据绑定到 HTML，和 ng-bind 指令类似 <br />
 	AngularJS 会在表达式书写的位置 “输出” 数据 <br />
 	类似于js表达式，可以包含文字，运算符，变量 <br />
@@ -60,10 +57,21 @@
 		<p>Name: <span class="label label-info" ng-bind="firstName + ' and ' + lastName"></span></p>
 	</div>
 
+	<hr />
+	<h3>AngularJS 对象 <small>例如ng-init="person = { firstName: 'QQ', lastName: 'ZY' }"</small></h3>
+	<div class="well" ng-init="person = { firstName: 'QQ', lastName: 'ZY' }">
+		<p>Name: <span class="label label-danger">{{ person.lastName }}</span></p>
+	</div>
+	<p>使用 ng-bind</p>
+	<div class="well" ng-init="person = { firstName: 'MH', lastName: 'CC' }">
+	<p>Name: <span class="label label-primary" ng-bind="person.lastName"></span></p>
+	</div>
 
-
-
-
+	<hr />
+	<h3>AngularJS 数组</h3>
+	<div class="well" ng-init="points = [1, 213, 3,213,124,4123,1]">
+		<p>数组的第三个值为： <span class="label label-warning">{{ points[2] }}</span></p>
+	</div>
 
 
 
